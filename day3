@@ -1,0 +1,14 @@
+reverse array
+
+  void reverseArray(vector<int> &arr) {
+    int n = arr.size();
+    int start = 0;
+    int end = n - 1;
+
+    // Use start < end as the condition to reverse the array correctly
+    while (start < end) {
+        swap(arr[start], arr[end]);
+        start++;
+        end--;
+    }
+}
