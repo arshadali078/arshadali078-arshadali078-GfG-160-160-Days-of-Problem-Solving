@@ -1,0 +1,39 @@
+#include <iostream>
+#include <unordered_map>
+#include <string>
+using namespace std;
+
+char firstNonRepeatingCharacter(const string& s) {
+    // Create a hashmap to store the frequency of each character
+    unordered_map<char, int> freq;
+
+    // Count the frequency of each character in the string
+    for (char ch : s) {
+        freq[ch]++;
+    }
+
+    // Iterate through the string to find the first character with frequency 1
+    for (char ch : s) {
+        if (freq[ch] == 1) {
+            return ch;
+        }
+    }
+
+    // If no non-repeating character is found, return '$'
+    return '$';
+}
+
+int main() {
+    string s;
+    cout << "Enter the string: ";
+    cin >> s;
+
+    char result = firstNonRepeatingCharacter(s);
+    if (result == '$') {
+        cout << -1 << endl; // Output -1 if no non-repeating character is found
+    } else {
+        cout << result << endl; // Output the first non-repeating character
+    }
+
+    return 0;
+}
