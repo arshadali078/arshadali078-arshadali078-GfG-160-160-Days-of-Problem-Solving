@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+bool searchMatrix(vector<vector<int>>& mat, int x) {
+    int n = mat.size();    // Number of rows
+    int m = mat[0].size(); // Number of columns
+
+    // Start binary search over the entire matrix
+    int left = 0, right = n * m - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        // Map mid to the matrix coordinates
+        int midValue = mat[mid / m][mid % m];
+
+        if (midValue == x) {
+            return true; // Found the target
+        } else if (midValue < x) {
+            left = mid + 1; // Search in the right half
+        } else {
+            right = mid - 1; // Search in the left half
+        }
+    }
+
+    return false; // Target not found
+}
+
+int main() {
+    vector<vector<int>> mat = {
+        {1, 5, 9, 11},
+        {14, 20, 21, 26},
+        {30, 34, 43, 50}
+    };
+    int x = 42;
+
+    if (searchMatrix(mat, x)) {
+        cout << "true" << endl;
+    } else {
+        cout << "false" << endl;
+    }
+
+    return 0;
+}
