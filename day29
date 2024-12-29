@@ -1,0 +1,35 @@
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+
+using namespace std;
+
+bool hasPairWithSum(const vector<int>& arr, int target) {
+    unordered_map<int, int> numMap; // Map to store elements and their indices
+
+    for (int i = 0; i < arr.size(); i++) {
+        int complement = target - arr[i]; // Find the required complement
+        if (numMap.find(complement) != numMap.end()) {
+            // If complement exists in the map, a pair is found
+            return true;
+        }
+        numMap[arr[i]] = i; // Store the current element in the map
+    }
+    return false; // No pair found
+}
+
+int main() {
+    vector<int> arr1 = {1, 4, 45, 6, 10, 8};
+    int target1 = 16;
+    cout << (hasPairWithSum(arr1, target1) ? "true" : "false") << endl;
+
+    vector<int> arr2 = {1, 2, 4, 3, 6};
+    int target2 = 11;
+    cout << (hasPairWithSum(arr2, target2) ? "true" : "false") << endl;
+
+    vector<int> arr3 = {11};
+    int target3 = 11;
+    cout << (hasPairWithSum(arr3, target3) ? "true" : "false") << endl;
+
+    return 0;
+}
