@@ -1,0 +1,32 @@
+#include <iostream>
+#include <unordered_set>
+#include <vector>
+using namespace std;
+
+int findUnionSize(vector<int>& a, vector<int>& b) {
+    unordered_set<int> unionSet;
+
+    // Insert all elements from the first array into the set
+    for (int elem : a) {
+        unionSet.insert(elem);
+    }
+
+    // Insert all elements from the second array into the set
+    for (int elem : b) {
+        unionSet.insert(elem);
+    }
+
+    // The size of the set is the size of the union
+    return unionSet.size();
+}
+
+int main() {
+    // Example input
+    vector<int> a = {1, 2, 3, 4, 5};
+    vector<int> b = {1, 2, 3};
+
+    int unionSize = findUnionSize(a, b);
+    cout << "Size of the union: " << unionSize << endl;
+
+    return 0;
+}
