@@ -1,0 +1,40 @@
+#include <iostream>
+#include <vector>
+#include <unordered_set>
+using namespace std;
+
+int longestConsecutiveSubsequence(vector<int>& arr) {
+    unordered_set<int> numSet(arr.begin(), arr.end());
+    int longest = 0;
+
+    for (int num : arr) {
+        // Check if it's the start of a sequence
+        if (numSet.find(num - 1) == numSet.end()) {
+            int currentNum = num;
+            int streak = 1;
+
+            // Check for consecutive numbers
+            while (numSet.find(currentNum + 1) != numSet.end()) {
+                currentNum++;
+                streak++;
+            }
+
+            longest = max(longest, streak);
+        }
+    }
+
+    return longest;
+}
+
+int main() {
+    vector<int> arr1 = {2, 6, 1, 9, 4, 5, 3};
+    cout << "Input: [2, 6, 1, 9, 4, 5, 3]\nOutput: " << longestConsecutiveSubsequence(arr1) << endl;
+
+    vector<int> arr2 = {1, 9, 3, 10, 4, 20, 2};
+    cout << "Input: [1, 9, 3, 10, 4, 20, 2]\nOutput: " << longestConsecutiveSubsequence(arr2) << endl;
+
+    vector<int> arr3 = {15, 13, 12, 14, 11, 10, 9};
+    cout << "Input: [15, 13, 12, 14, 11, 10, 9]\nOutput: " << longestConsecutiveSubsequence(arr3) << endl;
+
+    return 0;
+}
