@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+int subarraySum(vector<int>& arr, int k) {
+    unordered_map<int, int> prefixSumCount; // To store the frequency of prefix sums
+    int count = 0; // Count of subarrays
+    int currentSum = 0; // Cumulative sum
+    
+    // Initialize with sum 0 to account for subarrays starting from index 0
+    prefixSumCount[0] = 1;
+    
+    for (int num : arr) {
+        currentSum += num; // Update cumulative sum
+        
+        // Check if (currentSum - k) exists in the map
+        if (prefixSumCount.find(currentSum - k) != prefixSumCount.end()) {
+            count += prefixSumCount[currentSum - k];
+        }
+        
+        // Update the frequency of the current sum
+        prefixSumCount[currentSum]++;
+    }
+    
+    return count;
+}
+
+int main() {
+    vector<int> arr1 = {10, 2, -2, -20, 10};
+    int k1 = -10;
+    cout << "Output: " << subarraySum(arr1, k1) << endl; // Expected: 3
+
+    vector<int> arr2 = {9, 4, 20, 3, 10, 5};
+    int k2 = 33;
+    cout << "Output: " << subarraySum(arr2, k2) << endl; // Expected: 2
+
+    vector<int> arr3 = {1, 3, 5};
+    int k3 = 0;
+    cout << "Output: " << subarraySum(arr3, k3) << endl; // Expected: 0
+
+    return 0;
+}
