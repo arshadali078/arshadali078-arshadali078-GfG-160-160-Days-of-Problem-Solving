@@ -1,0 +1,44 @@
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+using namespace std;
+
+int countSubarraysWithXOR(vector<int>& arr, int k) {
+    unordered_map<int, int> prefixXorCount;
+    int prefixXOR = 0, count = 0;
+
+    for (int num : arr) {
+        prefixXOR ^= num; // Update prefix XOR
+
+        // Check if prefixXOR == k (subarray from start to current index)
+        if (prefixXOR == k) {
+            count++;
+        }
+
+        // Check if prefixXOR ^ k exists in the map
+        if (prefixXorCount.find(prefixXOR ^ k) != prefixXorCount.end()) {
+            count += prefixXorCount[prefixXOR ^ k];
+        }
+
+        // Update the hash map with the current prefixXOR
+        prefixXorCount[prefixXOR]++;
+    }
+
+    return count;
+}
+
+int main() {
+    vector<int> arr1 = {4, 2, 2, 6, 4};
+    int k1 = 6;
+    cout << "Output: " << countSubarraysWithXOR(arr1, k1) << endl;
+
+    vector<int> arr2 = {5, 6, 7, 8, 9};
+    int k2 = 5;
+    cout << "Output: " << countSubarraysWithXOR(arr2, k2) << endl;
+
+    vector<int> arr3 = {1, 1, 1, 1};
+    int k3 = 0;
+    cout << "Output: " << countSubarraysWithXOR(arr3, k3) << endl;
+
+    return 0;
+}
