@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+int repetitiveAddition(int n) {
+    while (n >= 10) {
+        int sum = 0;
+
+        // Calculate the sum of digits
+        while (n > 0) {
+            sum += n % 10; // Extract the last digit
+            n /= 10;       // Remove the last digit
+        }
+
+        n = sum; // Update n to the sum of its digits
+    }
+
+    return n;
+}
+
+int main() {
+    // Example inputs
+    int n1 = 1234;
+    int n2 = 5674;
+    int n3 = 9;
+
+    // Function calls and outputs
+    cout << "Output for " << n1 << " is " << repetitiveAddition(n1) << endl; // Expected: 1
+    cout << "Output for " << n2 << " is " << repetitiveAddition(n2) << endl; // Expected: 4
+    cout << "Output for " << n3 << " is " << repetitiveAddition(n3) << endl; // Expected: 9
+
+    return 0;
+}
