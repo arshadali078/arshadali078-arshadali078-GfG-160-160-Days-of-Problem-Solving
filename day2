@@ -17,3 +17,23 @@ class Solution {
          }
     }
 };
+second somlest element in Array
+int secondsmolest(int  arr[] ,int n){
+     int largest=arr[0];
+     int secondsomlest=-1;
+     
+for(int i=0; i<n;i++){
+
+   if(arr[i] < largest){
+
+    secondsomlest=largest;
+    largest=arr[i];
+}
+else if( arr[i] < secondsomlest && arr[i] != largest){
+    secondsomlest=arr[i];
+}
+}
+
+return secondsomlest;
+}
+
